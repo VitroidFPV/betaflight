@@ -24,7 +24,7 @@
  *
  * Generator    : `src/utils/make-build-info.py`
  * Source       : https://build.betaflight.com/api/options/2025.12
- * Input hash   : 6a57c50d7938349a1e8363e85d6741dc
+ * Input hash   : bb6a6f70b53c7805a4fcb2074d5cdde1
  */
 
 #pragma once
@@ -86,3 +86,5 @@
 #define BUILD_OPTION_PWM_OUTPUT                 8235
 
 void sbufWriteBuildInfoFlags(sbuf_t *dst);
+const char * const *getBuildInfoEnabledUseNames(void);
+unsigned getBuildInfoEnabledUseNamesCount(void);

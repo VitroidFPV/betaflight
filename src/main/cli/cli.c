@@ -123,6 +123,7 @@ bool cliMode = false;
 
 #include "msp/msp.h"
 #include "msp/msp_box.h"
+#include "msp/msp_build_info.h"
 #include "msp/msp_protocol.h"
 
 #include "osd/osd.h"
@@ -4869,6 +4870,18 @@ static void cliStatus(const char *cmdName, char *cmdline)
         cliPrintf("BUILD KEY: %s", buildKey);
         if (releaseName) {
             cliPrintf(" (%s)", releaseName);
+        }
+        cliPrintLinefeed();
+    }
+
+    cliPrint("BUILD FLAGS: ");
+    const char * const * const buildFlags = getBuildInfoEnabledUseNames();
+    const unsigned buildFlagsCount = getBuildInfoEnabledUseNamesCount();
+    if (!buildFlagsCount) {
+        cliPrintLine("None");
+    } else {
+        for (unsigned i = 0; i < buildFlagsCount; i++) {
+            cliPrintf("%s%s", i ? ", " : "", buildFlags[i]);
         }
         cliPrintLinefeed();
     }

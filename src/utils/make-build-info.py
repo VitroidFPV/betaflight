@@ -19,6 +19,8 @@ HEADER_FILE_TEMPLATE = """{license_header}
 {defines}
 
 void sbufWriteBuildInfoFlags(sbuf_t *dst);
+const char * const *getBuildInfoEnabledUseNames(void);
+unsigned getBuildInfoEnabledUseNamesCount(void);
 """
 
 SOURCE_FILE_TEMPLATE = """{license_header}
@@ -43,6 +45,20 @@ void sbufWriteBuildInfoFlags(sbuf_t *dst)
     {
         sbufWriteU16(dst, options[i]);
     }
+}
+
+static const char * const useNames[] = {
+{build_use_names}
+};
+
+const char * const *getBuildInfoEnabledUseNames(void)
+{
+    return useNames;
+}
+
+unsigned getBuildInfoEnabledUseNamesCount(void)
+{
+    return ARRAYLEN(useNames);
 }
 """
 
@@ -134,17 +150,22 @@ def main(root_path: str, target_path: str, endpoint_url: str):
     logging.info(f"Written header file: {msp_build_info_h_path}")
 
     with open(msp_build_info_c_path, "w+") as f:
-        lines = []
+        option_lines = []
+        use_name_lines = []
         indent = " " * 8
         for i, define in enumerate(gates):
             option_name, _, _ = options[i]
-            lines.append(f"#ifdef {define}")
-            lines.append(f"{indent}{option_name},")
-            lines.append("#endif")
+            option_lines.append(f"#ifdef {define}")
+            option_lines.append(f"{indent}{option_name},")
+            option_lines.append("#endif")
+            use_name_lines.append(f"#ifdef {define}")
+            use_name_lines.append(f'{indent}"{define}",')
+            use_name_lines.append("#endif")
         data = SOURCE_FILE_TEMPLATE \
             .replace("{license_header}", license_header) \
             .replace("{generated_warning}", generated_warning) \
-            .replace("{build_options}", "\n".join(lines))
+            .replace("{build_options}", "\n".join(option_lines)) \
+            .replace("{build_use_names}", "\n".join(use_name_lines))
         f.write(data)
 
     logging.info(f"Written source file: {msp_build_info_c_path}")

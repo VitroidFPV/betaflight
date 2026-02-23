@@ -24,7 +24,7 @@
  *
  * Generator    : `src/utils/make-build-info.py`
  * Source       : https://build.betaflight.com/api/options/2025.12
- * Input hash   : 6a57c50d7938349a1e8363e85d6741dc
+ * Input hash   : bb6a6f70b53c7805a4fcb2074d5cdde1
  */
 
 #include <stdint.h>
@@ -191,4 +191,164 @@ void sbufWriteBuildInfoFlags(sbuf_t *dst)
     {
         sbufWriteU16(dst, options[i]);
     }
+}
+
+static const char * const useNames[] = {
+#ifdef USE_SERIALRX_CRSF
+        "USE_SERIALRX_CRSF",
+#endif
+#ifdef USE_SERIALRX_FPORT
+        "USE_SERIALRX_FPORT",
+#endif
+#ifdef USE_SERIALRX_GHST
+        "USE_SERIALRX_GHST",
+#endif
+#ifdef USE_SERIALRX_IBUS
+        "USE_SERIALRX_IBUS",
+#endif
+#ifdef USE_SERIALRX_JETIEXBUS
+        "USE_SERIALRX_JETIEXBUS",
+#endif
+#ifdef USE_SERIALRX_MAVLINK
+        "USE_SERIALRX_MAVLINK",
+#endif
+#ifdef USE_RX_PPM
+        "USE_RX_PPM",
+#endif
+#ifdef USE_SERIALRX_SBUS
+        "USE_SERIALRX_SBUS",
+#endif
+#ifdef USE_SERIALRX_SPEKTRUM
+        "USE_SERIALRX_SPEKTRUM",
+#endif
+#ifdef USE_SERIALRX_SRXL2
+        "USE_SERIALRX_SRXL2",
+#endif
+#ifdef USE_SERIALRX_SUMD
+        "USE_SERIALRX_SUMD",
+#endif
+#ifdef USE_SERIALRX_SUMH
+        "USE_SERIALRX_SUMH",
+#endif
+#ifdef USE_SERIALRX_XBUS
+        "USE_SERIALRX_XBUS",
+#endif
+#ifdef USE_TELEMETRY_FRSKY_HUB
+        "USE_TELEMETRY_FRSKY_HUB",
+#endif
+#ifdef USE_TELEMETRY_HOTT
+        "USE_TELEMETRY_HOTT",
+#endif
+#ifdef USE_TELEMETRY_IBUS_EXTENDED
+        "USE_TELEMETRY_IBUS_EXTENDED",
+#endif
+#ifdef USE_TELEMETRY_LTM
+        "USE_TELEMETRY_LTM",
+#endif
+#ifdef USE_TELEMETRY_MAVLINK
+        "USE_TELEMETRY_MAVLINK",
+#endif
+#ifdef USE_TELEMETRY_SMARTPORT
+        "USE_TELEMETRY_SMARTPORT",
+#endif
+#ifdef USE_TELEMETRY_SRXL
+        "USE_TELEMETRY_SRXL",
+#endif
+#ifdef USE_ACRO_TRAINER
+        "USE_ACRO_TRAINER",
+#endif
+#ifdef USE_AKK_SMARTAUDIO
+        "USE_AKK_SMARTAUDIO",
+#endif
+#ifdef USE_ALTITUDE_HOLD
+        "USE_ALTITUDE_HOLD",
+#endif
+#ifdef USE_BATTERY_CONTINUE
+        "USE_BATTERY_CONTINUE",
+#endif
+#ifdef USE_CAMERA_CONTROL
+        "USE_CAMERA_CONTROL",
+#endif
+#ifdef USE_CHIRP
+        "USE_CHIRP",
+#endif
+#ifdef USE_DASHBOARD
+        "USE_DASHBOARD",
+#endif
+#ifdef USE_EMFAT_TOOLS
+        "USE_EMFAT_TOOLS",
+#endif
+#ifdef USE_ESCSERIAL_SIMONK
+        "USE_ESCSERIAL_SIMONK",
+#endif
+#ifdef USE_GPS
+        "USE_GPS",
+#endif
+#ifdef USE_LED_STRIP
+        "USE_LED_STRIP",
+#endif
+#ifdef USE_LED_STRIP_64
+        "USE_LED_STRIP_64",
+#endif
+#ifdef USE_MAG
+        "USE_MAG",
+#endif
+#ifdef USE_OSD_SD
+        "USE_OSD_SD",
+#endif
+#ifdef USE_OSD_HD
+        "USE_OSD_HD",
+#endif
+#ifdef USE_FRSKYOSD
+        "USE_FRSKYOSD",
+#endif
+#ifdef USE_PINIO
+        "USE_PINIO",
+#endif
+#ifdef USE_POSITION_HOLD
+        "USE_POSITION_HOLD",
+#endif
+#ifdef USE_RACE_PRO
+        "USE_RACE_PRO",
+#endif
+#ifdef USE_SOFTSERIAL
+        "USE_SOFTSERIAL",
+#endif
+#ifdef USE_SERVOS
+        "USE_SERVOS",
+#endif
+#ifdef USE_VTX
+        "USE_VTX",
+#endif
+#ifdef USE_WING
+        "USE_WING",
+#endif
+#ifdef USE_BRUSHED
+        "USE_BRUSHED",
+#endif
+#ifdef USE_DSHOT
+        "USE_DSHOT",
+#endif
+#ifdef USE_MULTISHOT
+        "USE_MULTISHOT",
+#endif
+#ifdef USE_ONESHOT
+        "USE_ONESHOT",
+#endif
+#ifdef USE_PROSHOT
+        "USE_PROSHOT",
+#endif
+#ifdef USE_PWM_OUTPUT
+        "USE_PWM_OUTPUT",
+#endif
+};
+
+const char * const *getBuildInfoEnabledUseNames(void)
+{
+    return useNames;
+}
+
+unsigned getBuildInfoEnabledUseNamesCount(void)
+{
+    return ARRAYLEN(useNames);
 }
